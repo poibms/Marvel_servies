@@ -22,13 +22,11 @@ class RandomChar extends Component{
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
         this.marvelService
             .getCharacter(id)
-            .then(res => {
-                this.setState(res)
-            })
+            .then(this.onCharLoaded);
     }
 
     render() {
-        const { name, description, thumbnail, homepage, wiki} = this.state;
+        const { name, description, thumbnail, homepage, wiki} = this.state.char;
         return (
             <div className="randomchar">
                 <div className="randomchar__block">
