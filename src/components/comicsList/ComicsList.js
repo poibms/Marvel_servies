@@ -3,6 +3,7 @@ import './comicsList.scss';
 import useMarvelService from '../../Services/MarvelService';
 import Spinner from "../spinner/Spinner";
 import ErrorMesage from "../errorMessage/ErrorMesage";
+import { Link } from 'react-router-dom';
 
 const ComicsList = () => {
 
@@ -30,22 +31,20 @@ const ComicsList = () => {
         ended = true;
     }
     setComicsList(comicsList => [...comicsList, ...newComicsList])
-    console.log(comicsList);
     setNewItemLoading(false);
     setOffset(offset => offset + 9);
     setComicsEnded(ended);
   }
   
   function renderComics(comicsArray) {
-    console.log(comicsArray);
     const comics = comicsArray.map((item, i) => {
       return (
         <li className="comics__item" key={i}>
-          <a href="#">
+          <Link to={`/comics/${item.id}`}>
             <img src={item.image} alt={item.title} className="comics__item-img"/>
             <div className="comics__item-name">{item.title}</div>
             <div className="comics__item-price">{item.price}</div>
-          </a>
+          </Link>
         </li>
       )
     })
